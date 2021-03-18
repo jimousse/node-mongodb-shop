@@ -1,9 +1,8 @@
 const MongoClient = require('mongodb').MongoClient;
 
-const USER = 'jimmy';
-const PASSWORD = 'Cp5sH2pzhNy4aJg';
 const DB = 'shop';
-const URI = `mongodb+srv://${USER}:${PASSWORD}@cluster0.itoni.mongodb.net/${DB}?retryWrites=true&w=majority`;
+const URI = `mongodb://127.0.0.1:27017`;
+
 
 const client = new MongoClient(URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -14,7 +13,7 @@ const mongoConnect = (callback) => {
   client.connect()
     .then((client) => {
       console.log('Connected to database.');
-      _db = client.db();
+      _db = client.db(DB);
       callback();
     })
     .catch((e) => {

@@ -7,7 +7,7 @@ class User {
   constructor({ username, email, cart, id }) {
     this.username = username;
     this.email = email;
-    this.cart = cart; // {items: []}
+    this.cart = cart || { items: [] }; // {items: []}
     this._id = id ? new mongodb.ObjectId(id) : null;
   }
 
