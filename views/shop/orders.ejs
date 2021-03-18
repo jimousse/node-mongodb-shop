@@ -17,7 +17,7 @@
 						<div class="orders__item-info">
 							<span class="orders__item-id">Order # <%= order._id%></span>
 							<span class="orders__item-total">Total: 
-							<span class="orders__item-price">$<%= order.total%></span>
+							<span class="orders__item-price">$<%= order.totalPrice%></span>
 						</div>
 						<ul class="products">
 							<% order.items.forEach((product, i)=> { %>

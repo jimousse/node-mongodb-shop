@@ -52,14 +52,17 @@ class User {
       })
       .toArray()
       .then(products => {
+        let totalPrice = 0;
         // add quantity to the product we're returning
         return products.map(product => {
           const cartProductIndex = this.cart.items.findIndex(p => {
             return p.productId.toString() == product._id.toString();
           });
+          const productQuantity = this.cart.items[cartProductIndex].quantity;
           return {
             ...product,
-            quantity: this.cart.items[cartProductIndex].quantity
+            productTotalPrice: Number(productQuantity) * Number(product.price),
+            quantity: productQuantity
           };
         });
       });
@@ -84,8 +87,14 @@ class User {
     const db = getDb();
     return this.getCart()
       .then(products => {
+        console.log(products);
+        let totalPrice = 0;
+        products.forEach(product => {
+          totalPrice += Number(product.quantity) * Number(product.price);
+        });
         const order = {
           items: products,
+          totalPrice,
           userId: new mongodb.ObjectId(this._id)
         };
         return db.collection('orders').insertOne(order);

@@ -13,7 +13,7 @@
                         <li  class="cart__item">
                             <div class="cart__item-main">
                                 <span class="cart__item-title"><%= product.title%></span>
-                                <span class="cart__item-price">$<%= product.price%></span>
+                                <span class="cart__item-price">$<%= product.productTotalPrice%></span>
                             </div>
                             <div class="cart__in-stock">In stock</div>
                             <span class="cart__item-qty">Qty: <%= product.quantity%></span>
@@ -29,7 +29,7 @@
                 <hr class="separator">
                 <div class="cart__total">
                     Total:
-                    <span class="cart__total-price">$ 0</span>
+                    <span class="cart__total-price">$ <%= totalPrice%></span>
                 </div>
                 <form class="cart__cta" action="/create-order" method="post">
                     <button class="btn btn--primary">Order now!</button>
