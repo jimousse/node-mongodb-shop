@@ -1,0 +1,51 @@
+.orders {
+
+  &__name {
+    font-weight: 300;
+  }
+
+  &__item {
+    list-style: none;
+
+    &:not(:last-child) {
+      margin-bottom: 4rem;
+    }
+  }
+
+  &__item-info {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__item-total {
+    font-size: 2rem;
+  }
+
+  &__item-price {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  &__item-id {
+    font-size: 2rem;
+  }
+}
+
+.products {
+  padding: 1rem;
+}
+
+.product {
+  list-style: none;
+
+  &__title {
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: #007185;
+    margin-bottom: .2rem;
+  }
+
+  &__qty {
+    font-size: 1.3rem;
+  }
+}

@@ -1,0 +1,29 @@
+.product-card {
+  &__title {
+    text-align: center;
+    font-weight: 300;
+    margin-bottom: 2rem;
+  }
+
+  &__image-container {
+    overflow: hidden;
+    height: 20rem;
+  }
+
+  &__image {
+    width: 100%;
+    transform: scale(2);
+  }
+
+  &__description {
+    height: 10rem;
+    padding: .5rem;
+  }
+
+  &__price {
+    font-weight: 700;
+    color: #B12704;
+    padding: .5rem;
+    font-size: 1.8rem;
+  }
+}

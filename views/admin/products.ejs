@@ -1,0 +1,27 @@
+<%- include('../includes/head.ejs') %>
+    </head>
+
+    <body>
+        <%- include('../includes/header.ejs') %>
+
+            <main class="content">
+                <% if (prods.length> 0) { %>
+                    <div class="grid">
+                        <% for (let product of prods) { %>
+                            <article class="card">
+                                <%- include('../includes/product-card.ejs', {product}) %>
+                                <div class="card__actions">
+                                    <a href="/admin/edit-product/<%=product._id%>?edit=true" class="btn">Edit</a>
+                                    <form action="/admin/delete-product" method="POST">
+                                        <input type="hidden" value="<%=product._id%>" name="productId">
+                                        <button class="btn" type="submit">Delete</button>
+                                    </form>
+                                </div>
+                            </article>
+                            <% } %>
+                    </div>
+                    <% } else { %>
+                        <h1>No Products Found!</h1>
+                    <% } %>
+            </main>
+<%- include('../includes/end.ejs') %>

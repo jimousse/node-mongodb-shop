@@ -1,0 +1,12 @@
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+
+  & > * {
+    margin-bottom: 3rem;
+
+    &:not(:last-child) {
+      margin-right: 3rem;
+    }
+  }
+}

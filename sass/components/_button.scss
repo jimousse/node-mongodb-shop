@@ -1,0 +1,39 @@
+.btn {
+  background: linear-gradient(to bottom,#f7f8fa,#e7e9ec);
+  border-radius: 2px;
+  border-color: #ADB1B8 #A2A6AC #8D9096;
+  border-width: 1px;
+  border-style: solid;
+  padding: .7rem 1.7rem;
+  font-family: inherit;
+  font-size: 1.2rem;
+  color: $color-black;
+
+
+  &:hover {
+    cursor: pointer;
+    border-color: #a2a6ac #979aa1 #82858a;
+    background: #e7e9ec;
+  }
+
+  &:focus {
+    @include focus-ring-amazon;
+  }
+
+  
+  &--primary {
+    background: linear-gradient(to bottom,#f7dfa5,#f0c14b);
+    border-color: #a88734 #9c7e31 #846a29;
+
+    &:hover {
+      background: linear-gradient(to bottom,#f5d78e,#eeb933);
+    }
+  }
+}
+
+a.btn {
+  &:visited,
+  &:link {
+    text-decoration: none;
+  }
+}

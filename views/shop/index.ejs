@@ -1,0 +1,22 @@
+<%- include('../includes/head.ejs') %>
+
+    <body>
+        <%- include('../includes/header.ejs') %>
+
+            <main class="content">
+                <% if (prods.length> 0) { %>
+                    <div class="grid">
+                        <% for (let product of prods) { %>
+                            <article class="card">
+                                <%- include('../includes/product-card.ejs', {product}) %>
+                                <div class="card__actions">
+                                    <%- include('../includes/add-to-cart.ejs', {product}) %>
+                                </div>
+                            </article>
+                            <% } %>
+                    </div>
+                    <% } else { %>
+                        <h1>No Products Found!</h1>
+                        <% } %>
+            </main>
+            <%- include('../includes/end.ejs') %>

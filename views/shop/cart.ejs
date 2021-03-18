@@ -1,0 +1,44 @@
+<%- include('../includes/head.ejs') %>
+
+<body>
+    <%- include('../includes/header.ejs') %>
+    <main class="content">
+        <% if (products.length> 0) { %>
+            <div class="cart">
+                <h1 class="cart__name">Your Cart</h1>
+                <div class="cart__price-word">Price</div>
+                <hr class="separator cart__separator">
+                <ul  class="cart_item-list">
+                    <% products.forEach((product)=> { %>
+                        <li  class="cart__item">
+                            <div class="cart__item-main">
+                                <span class="cart__item-title"><%= product.title%></span>
+                                <span class="cart__item-price">$<%= product.price%></span>
+                            </div>
+                            <div class="cart__in-stock">In stock</div>
+                            <span class="cart__item-qty">Qty: <%= product.quantity%></span>
+                            <form class="cart__item-cta" action="/cart-delete-item" method="post">
+                                <input type="hidden" name="productId" value="<%=product._id%>">
+                                <button class="btn">
+                                    Delete
+                                </button>
+                            </form>
+                        </li>
+                    <% })%>
+                </ul>
+                <hr class="separator">
+                <div class="cart__total">
+                    Total:
+                    <span class="cart__total-price">$ 0</span>
+                </div>
+                <form class="cart__cta" action="/create-order" method="post">
+                    <button class="btn btn--primary">Order now!</button>
+                </form>
+            </div>
+        <% } else { %>
+            <div class="cart">
+                <h1 class="cart__name">Your Cart is empty.</h1>
+            </div>        
+        <% } %>
+    </main>
+<%- include('../includes/end.ejs') %>

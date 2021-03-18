@@ -1,0 +1,19 @@
+.card {
+  display: inline-block;
+  border-radius: 3px;
+  border: 1px solid #A2A6AC;
+  box-shadow: 0 2rem 4rem rgba($color-black, .2);
+  padding: 2rem 0;
+  width: 25rem;
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+
+    & > * {
+      &:not(:last-child) {
+        margin-right: 1rem;
+      }
+    }
+  }
+}
