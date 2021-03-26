@@ -1,7 +1,7 @@
 {
-  "name": "nodejs-complete-guide",
+  "name": "book-shop",
   "version": "1.0.0",
-  "description": "Complete Node.js Guide",
+  "description": "Node/mongodb project",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,7 +9,7 @@
     "start-server": "node --trace-warnings app.js",
     "compile:sass": "node-sass sass/main.scss public/css/main.css"
   },
-  "author": "Maximilian Schwarzmüller",
+  "author": "Jimmy",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^1.18.3",
