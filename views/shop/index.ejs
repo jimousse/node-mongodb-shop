@@ -9,9 +9,12 @@
                         <% for (let product of prods) { %>
                             <article class="card">
                                 <%- include('../includes/product-card.ejs', {product}) %>
-                                <div class="card__actions">
-                                    <%- include('../includes/add-to-cart.ejs', {product}) %>
-                                </div>
+                                    <% if (isLoggedIn) { %>
+                                        <div class="card__actions">
+                                            <%- include('../includes/add-to-cart.ejs', {product}) %>
+                                        </div>
+                                        <% } %>    
+
                             </article>
                             <% } %>
                     </div>

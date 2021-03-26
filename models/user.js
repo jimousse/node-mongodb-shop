@@ -4,9 +4,9 @@ const mongodb = require('mongodb');
 const COLLECTION_NAME = 'users';
 
 class User {
-  constructor({ username, email, cart, id }) {
-    this.username = username;
+  constructor({ password, email, cart, id }) {
     this.email = email;
+    this.password = password;
     this.cart = cart || { items: [] }; // {items: []}
     this._id = id ? new mongodb.ObjectId(id) : null;
   }
@@ -52,7 +52,6 @@ class User {
       })
       .toArray()
       .then(products => {
-        let totalPrice = 0;
         // add quantity to the product we're returning
         return products.map(product => {
           const cartProductIndex = this.cart.items.findIndex(p => {
@@ -87,7 +86,6 @@ class User {
     const db = getDb();
     return this.getCart()
       .then(products => {
-        console.log(products);
         let totalPrice = 0;
         products.forEach(product => {
           totalPrice += Number(product.quantity) * Number(product.price);
@@ -125,6 +123,33 @@ class User {
     const db = getDb();
     return db.collection(COLLECTION_NAME)
       .find({ _id: new mongodb.ObjectId(userId) })
+      .next();
+  }
+
+  static findByEmail(email) {
+    const db = getDb();
+    return db.collection(COLLECTION_NAME)
+      .find({ email })
+      .next();
+  }
+
+  static updateUser(id, updateSet) {
+    const db = getDb();
+    return db.collection(COLLECTION_NAME)
+      .updateOne(
+        { _id: mongodb.ObjectId(id) },
+        { $set: updateSet }
+      )
+      .then(() => {
+        console.log(`Updating existing user ${id} with`, updateSet);
+      })
+      .catch(e => console.log(e));
+  }
+
+  static findUser(filter) {
+    const db = getDb();
+    return db.collection(COLLECTION_NAME)
+      .find(filter)
       .next();
   }
 }

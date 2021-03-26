@@ -22,6 +22,7 @@
                                 <button class="btn">
                                     Delete
                                 </button>
+                                <input type="hidden" value="<%= csrfToken %>" name="_csrf"> 
                             </form>
                         </li>
                     <% })%>
@@ -33,6 +34,7 @@
                 </div>
                 <form class="cart__cta" action="/create-order" method="post">
                     <button class="btn btn--primary">Order now!</button>
+                    <input type="hidden" value="<%= csrfToken %>" name="_csrf">
                 </form>
             </div>
         <% } else { %>

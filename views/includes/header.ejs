@@ -11,6 +11,7 @@
                     <span class="header__item-name" >Products</span>
                 </a>
             </li>
+            <% if (isLoggedIn) { %>
             <li class="header__item">
                 <a class="header__item-link" href="/cart">
                     <span class="header__item-name" >Cart</span>
@@ -31,6 +32,28 @@
                     <span class="header__item-name" >Admin Products</span>
                 </a>
             </li>
+            <% } %>
+        </ul>
+        <ul class="header__item-list">
+            <% if (!isLoggedIn) { %>
+            <li class="header__item">
+                <a class="header__item-link" href="/signup">
+                    <span class="header__item-name">Sign up</span>
+                </a>
+            </li>
+            <li class="header__item">
+                <a class="header__item-link" href="/login">
+                    <span class="header__item-name">Login</span>
+                </a>
+            </li>
+            <% } else { %>
+            <li class="header__item">
+                <form  class="header__item-link" action="/logout" method="POST">
+                    <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                    <button class="header__item-name" type="submit">Logout</button>
+                </form>
+            </li>
+            <% } %>
         </ul>
     </nav>
 </header>

@@ -1,0 +1,42 @@
+<%- include('../includes/head.ejs') %>
+  </head>
+
+  <body>
+    <%- include('../includes/header.ejs') %>
+
+      <main class="content">
+        <% if (errorMessage) { %>
+          <div class="error-message"><%= errorMessage %></div>
+        <% } %>
+        <form class="form" action="/login" method="POST">
+          <div class="form__control">
+            <label class="form__label"  for="email">Email</label>
+            <input 
+              class="form__input <%= validationErrors.find(e => e.param === 'email') ? 'invalid' : null%>" 
+              type="text"
+              name="email" 
+              id="email"
+              value="<%= oldInput.email %>"
+            >
+          </div>
+          <hr class="separator">
+          <div class="form__control">
+            <label class="form__label"  for="password">Password</label>
+            <input
+              class="form__input <%= validationErrors.find(e => e.param === 'password') ? 'invalid' : null%>" 
+              type="password"
+              name="password"
+              id="password"
+              value="<%= oldInput.password %>"
+            >
+          </div>
+          <button class="btn form__cta" type="submit">
+            Login
+          </button>
+          <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+        </form>
+        <div>
+          <a class="btn form__cta" href="/reset">Reset Password</a>
+        </div>
+      </main>
+<%- include('../includes/end.ejs') %>

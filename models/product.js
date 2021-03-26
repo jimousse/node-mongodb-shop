@@ -11,7 +11,6 @@ class Product {
     this.imageUrl = imageUrl;
     this.userId = userId;
     this._id = id ? new mongodb.ObjectId(id) : null;
-
   }
 
   save() {
@@ -60,6 +59,26 @@ class Product {
         console.log('deleted');
       })
       .catch(e => console.log(e));
+  }
+
+  static updateProduct(id, updateSet) {
+    const db = getDb();
+    return db.collection(COLLECTION_NAME)
+      .updateOne(
+        { _id: mongodb.ObjectId(id) },
+        { $set: updateSet }
+      )
+      .then(() => {
+        console.log(`Updating existing product ${id} with`, updateSet);
+      })
+      .catch(e => console.log(e));
+  }
+
+  static getProductsByUserId(userId) {
+    const db = getDb();
+    return db.collection(COLLECTION_NAME)
+      .find({ userId })
+      .toArray();
   }
 }
 
