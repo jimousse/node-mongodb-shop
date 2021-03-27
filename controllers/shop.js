@@ -1,4 +1,7 @@
+const fs = require('fs');
+const path = require('path');
 const Product = require('../models/product');
+const User = require('../models/user');
 
 exports.getProducts = (req, res, next) => {
   Product.fetchAll()
@@ -125,3 +128,24 @@ exports.getOrders = (req, res, next) => {
       next(error);
     });
 };
+
+exports.getInvoice = (req, res, next) => {
+  const orderId = req.params.orderId;
+  User.findOrderById(orderId)
+    .then(order => {
+      if (!order) return next(new Error('No order found.'));
+      // restrict access to the correct user
+      if (order.userId.toString() !== req.user._id.toString()) {
+        return next(new Error('Unauthorized.'));
+      }
+      const invoice = `invoice-${orderId}.pdf`;
+      const invoicePath = path.join('data', 'invoices', invoice);
+      console.log('Sending invoice file', invoicePath);
+      const file = fs.createReadStream(invoicePath);
+      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Disposition', `attachment; filename=${invoice}`);
+      // streams file directly into the response, doesn't load the file in memory
+      file.pipe(res);
+    })
+    .catch(err => next(err));
+}

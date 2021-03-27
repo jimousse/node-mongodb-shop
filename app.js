@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const csrf = require('csurf');
+const multer = require('multer');
 
 
 const MongoDBStore = require('connect-mongodb-session')(session);
@@ -13,6 +14,27 @@ const store = new MongoDBStore({
 });
 const csrfProtection = csrf({});
 const flash = require('connect-flash');
+
+const fileStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'images')
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    cb(null, `image-${uniqueSuffix}-${file.originalname}`);
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === 'image/png' ||
+    file.mimetype === 'image/jpg' ||
+    file.mimetype === 'image/jpeg') {
+    cb(null, true);
+  } else {
+    console.log('Wrong image type.');
+    cb(null, false);
+  }
+};
 
 const mongoConnect = require('./util/database').mongoConnect;
 
@@ -31,7 +53,9 @@ const shopRoutes = require('./routes/shop');
 const authRoutes = require('./routes/auth');
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(multer({ storage: fileStorage, fileFilter }).single('image'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use(session({
   secret: 'jimmy',
   resave: false,
@@ -81,9 +105,10 @@ app.use(errorController.get404);
 
 
 app.use((error, req, res, next) => {
+  console.log(error);
   res.status(500).render('500', {
     pageTitle: 'Error!',
-    path: '/500'
+    path: '/500',
   });
 });
 

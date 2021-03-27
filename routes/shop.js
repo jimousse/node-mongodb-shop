@@ -22,4 +22,6 @@ router.post('/create-order', isLoggedIn, shopController.postOrder);
 
 router.get('/orders', isLoggedIn, shopController.getOrders);
 
+router.get('/orders/:orderId', isLoggedIn, shopController.getInvoice);
+
 module.exports = router;

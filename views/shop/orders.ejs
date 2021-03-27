@@ -24,6 +24,7 @@
 								<li class="product">
 									<div class="product__title"><%= product.title %></div>
 									<div class="product__qty">Qty: <%= product.quantity %></div>
+									<a href="/orders/<%=order._id%>">Invoice</a>
 								</li>
 								<% if (i < order.items.length - 1) {%>
 									<hr class="separator">

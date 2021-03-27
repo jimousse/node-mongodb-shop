@@ -119,6 +119,12 @@ class User {
       .toArray();
   }
 
+  static findOrderById(orderId) {
+    const db = getDb();
+    return db.collection('orders')
+      .findOne({ _id: new mongodb.ObjectId(orderId) });
+  }
+
   static findById(userId) {
     const db = getDb();
     return db.collection(COLLECTION_NAME)

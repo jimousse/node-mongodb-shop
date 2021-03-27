@@ -12,28 +12,37 @@ exports.getAddProduct = (req, res, next) => {
 };
 
 exports.postAddProduct = (req, res, next) => {
-  const DEFAULT_URL = 'https://thumbs-prod.si-cdn.com/ufPRE9RHUDHqQdOsLvYHhJAxy1k=/fit-in/1600x0/https://public-media.si-cdn.com/filer/91/91/91910c23-cae4-46f8-b7c9-e2b22b8c1710/lostbook.jpg';
-  const { title, imageUrl, price, description } = req.body;
-  const user = req.user;
-  const product = new Product({
-    title,
-    imageUrl: imageUrl || DEFAULT_URL,
-    price,
-    description,
-    userId: user._id,
-  });
+  const { title, price, description } = req.body;
+  const image = req.file;
   const errors = validationResult(req);
-
+  let errorMessage = null;
   if (!errors.isEmpty()) {
+    errorMessage = errors.array()[0].msg;
+  } else if (!image) {
+    errorMessage = 'Attached file not an image';
+  }
+  if (errorMessage) {
     return res.render('admin/edit-product', {
       pageTitle: 'Add Product',
       path: '/admin/add-product',
       editing: false,
-      product: { title, imageUrl, price, description },
-      errorMessage: errors.array()[0].msg,
+      product: { title, price, description },
+      errorMessage,
       hasError: true,
     });
   }
+
+
+  // store file path in db and store file in OS
+  const imageUrl = image.path;
+  const user = req.user;
+  const product = new Product({
+    title,
+    price,
+    imageUrl,
+    description,
+    userId: user._id,
+  });
   product
     .save()
     .then(() => {
@@ -80,14 +89,14 @@ exports.getEditProduct = (req, res, next) => {
 };
 
 exports.postEditProduct = (req, res, next) => {
-  const { productId, title, price, imageUrl, description } = req.body;
+  const { productId, title, price, description } = req.body;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.render('admin/edit-product', {
       pageTitle: 'Edit Product',
       path: '/admin/edit-product',
       editing: true,
-      product: { title, imageUrl, price, description, _id: productId },
+      product: { title, price, description, _id: productId },
       errorMessage: errors.array()[0].msg,
       hasError: true,
     });
@@ -103,7 +112,12 @@ exports.postEditProduct = (req, res, next) => {
         console.log('Logged in user cannot delete this product.');
         return res.redirect('/');
       }
-      Product.updateProduct(productId, { title, price, description, imageUrl })
+      const updateSet = { title, price, description };
+      // check if new image uploaded
+      if (req.file) {
+        updateSet.imageUrl = req.file.path;
+      }
+      Product.updateProduct(productId, updateSet)
         .then(() => {
           res.redirect('/admin/products');
         });

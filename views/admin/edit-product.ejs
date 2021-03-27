@@ -8,8 +8,12 @@
         <% if (errorMessage) { %>
           <div class="error-message"><%= errorMessage %></div>
         <% } %>
-        <form class="form" action="/admin/<% if (editing) {%>edit-product<% } else {%>add-product<% } %>"
-          method="POST">
+        <form 
+          class="form" 
+          action="/admin/<% if (editing) {%>edit-product<% } else {%>add-product<% } %>"
+          method="POST"
+          enctype="multipart/form-data"
+        >
           <div class="form__control">
             <label class="form__label"  for="title">Title</label>
             <input 
@@ -20,7 +24,7 @@
             >
           </div>
           <hr class="separator">
-          <div class="form__control">
+          <!--<div class="form__control">
             <label class="form__label"  for="imageUrl">Image URL</label>
             <input
               class="form__input"
@@ -28,6 +32,15 @@
               name="imageUrl"
               id="imageUrl"
               value="<% if (editing || hasError) {%><%=product.imageUrl%><% }%>"
+            >
+          </div> -->
+          <div class="form__control">
+            <label class="form__label"  for="image">Image</label>
+            <input
+              class="form__input"
+              type="file"
+              name="image"
+              id="image"
             >
           </div>
           <hr class="separator">

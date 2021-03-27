@@ -12,9 +12,6 @@ const bookEntryValidators = [
     .isLength({ min: 1 })
     .withMessage('Book title must be at least one character long.')
     .trim(),
-  check('imageUrl')
-    .isURL()
-    .withMessage('Image URL must be a valid URL'),
   check('price')
     .isFloat()
 ];
