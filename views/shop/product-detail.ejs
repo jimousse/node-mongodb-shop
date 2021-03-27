@@ -2,18 +2,18 @@
 
   <body>
     <%- include('../includes/header.ejs') %>
-      <main class="content">
-        <h1>
+      <main class="content product-detail">
+        <h1 class="product-card__title">
           <%= product.title %>
         </h1>
-        <hr>
-        <div>
-          <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
+        <hr class="separator">
+        <div class="product-detail__image">
+          <img src="/<%= product.imageUrl %>" alt="<%= product.title %>">
         </div>
-        <h2>
+        <div class="product-card__price">$
           <%= product.price %>
-        </h2>
-        <p>
+        </div>
+        <p class="product-card__description">
           <%= product.description %>
         </p>
         <% if (isLoggedIn) { %>

@@ -1,5 +1,6 @@
 const Product = require('../models/product');
 const { validationResult } = require('express-validator');
+const { deleteFile } = require('../util/file');
 
 exports.getAddProduct = (req, res, next) => {
   res.render('admin/edit-product', {
@@ -115,7 +116,10 @@ exports.postEditProduct = (req, res, next) => {
       const updateSet = { title, price, description };
       // check if new image uploaded
       if (req.file) {
+        // update with new image
         updateSet.imageUrl = req.file.path;
+        // delete image from the server
+        deleteFile(product.imageUrl);
       }
       Product.updateProduct(productId, updateSet)
         .then(() => {

@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const Product = require('../models/product');
 const User = require('../models/user');
+const PDFKit = require('pdfkit');
 
 exports.getProducts = (req, res, next) => {
   Product.fetchAll()
@@ -140,12 +141,25 @@ exports.getInvoice = (req, res, next) => {
       }
       const invoice = `invoice-${orderId}.pdf`;
       const invoicePath = path.join('data', 'invoices', invoice);
-      console.log('Sending invoice file', invoicePath);
-      const file = fs.createReadStream(invoicePath);
+
       res.setHeader('Content-Type', 'application/pdf');
-      res.setHeader('Content-Disposition', `attachment; filename=${invoice}`);
-      // streams file directly into the response, doesn't load the file in memory
-      file.pipe(res);
+      res.setHeader('Content-Disposition', `inline; filename=${invoice}`);
+
+      const pdfDoc = new PDFKit();
+      // writes on the serser
+      pdfDoc.pipe(fs.createWriteStream(invoicePath));
+      // writes into the response
+      pdfDoc.pipe(res);
+      pdfDoc.fontSize(20).text('Invoice');
+      pdfDoc.fontSize(15).text('-------------------');
+      order.items.forEach(item => {
+        pdfDoc.text(`- ${item.title}, x${item.quantity}, $${item.productTotalPrice}`);
+      });
+      pdfDoc.text('-------------------');
+      pdfDoc.text(`Total: $${order.totalPrice}`)
+      pdfDoc.end();
+
+      console.log('Sending invoice file', invoicePath);
     })
     .catch(err => next(err));
 }

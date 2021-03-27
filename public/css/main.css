@@ -82,6 +82,12 @@ body {
 .invalid {
   border-color: red; }
 
+.reset-password-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0; }
+
 .btn {
   background: linear-gradient(to bottom, #f7f8fa, #e7e9ec);
   border-radius: 2px;
@@ -246,6 +252,30 @@ a.btn:visited, a.btn:link {
     margin-bottom: 3rem; }
     .grid > *:not(:last-child) {
       margin-right: 3rem; }
+
+.logout__form {
+  height: 100%; }
+
+.logout__button {
+  height: 100%;
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  text-transform: uppercase;
+  cursor: pointer; }
+  .logout__button:focus {
+    outline: none; }
+
+.product-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .product-detail .separator {
+    align-self: stretch; }
+  .product-detail__image {
+    height: 200px; }
+    .product-detail__image > img {
+      height: 100%; }
 
 .content {
   padding: 5rem; }

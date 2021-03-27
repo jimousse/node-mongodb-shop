@@ -1,5 +1,6 @@
 const getDb = require('../util/database').getDb;
 const mongodb = require('mongodb');
+const { deleteFile } = require('../util/file');
 
 const COLLECTION_NAME = 'products';
 
@@ -54,9 +55,17 @@ class Product {
   static deleteById(id) {
     const db = getDb();
     return db.collection(COLLECTION_NAME)
-      .deleteOne({ _id: new mongodb.ObjectId(id) })
+      .findOne({ _id: new mongodb.ObjectId(id) })
       .then(product => {
-        console.log('deleted');
+        console.log('Deleting product:', product._id);
+        if (product.imageUrl) {
+          console.log('Deleting product image:', product._id);
+          return deleteFile(product.imageUrl);
+        }
+      })
+      .then(() => {
+        return db.collection(COLLECTION_NAME)
+          .deleteOne({ _id: new mongodb.ObjectId(id) });
       })
       .catch(e => console.log(e));
   }

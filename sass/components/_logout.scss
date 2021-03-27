@@ -1,0 +1,18 @@
+.logout {
+  &__form {
+    height: 100%;
+  }
+
+  &__button {
+    height: 100%;
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+  }
+} 
