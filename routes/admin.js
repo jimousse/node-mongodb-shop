@@ -16,13 +16,9 @@ const bookEntryValidators = [
     .isFloat()
 ];
 
-// admin/add-product => GET
 router.get('/add-product', isLoggedIn, adminController.getAddProduct);
-
-// // /admin/products => GET
 router.get('/products', isLoggedIn, adminController.getProducts);
 
-// admin/add-product => POST
 router.post(
   '/add-product',
   ...bookEntryValidators,
@@ -39,6 +35,6 @@ router.post(
   adminController.postEditProduct
 );
 
-router.post('/delete-product', isLoggedIn, adminController.postDeleteProduct);
+router.delete('/product/:productId', isLoggedIn, adminController.deleteProduct);
 
 module.exports = router;
