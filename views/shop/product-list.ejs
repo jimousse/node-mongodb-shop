@@ -1,25 +1,26 @@
 <%- include('../includes/head.ejs') %>
 
-    <body>
-        <%- include('../includes/header.ejs') %>
+<body>
+    <%- include('../includes/header.ejs') %>
 
-            <main class="content">
-                <% if (prods.length> 0) { %>
-                    <div class="grid">
-                        <% for (let product of prods) { %>
-                            <article class="card">
-                                <%- include('../includes/product-card.ejs', {product}) %>
-                                <div class="card__actions">
-                                    <a href="/products/<%= product._id %>" class="btn">Details</a>
-                                    <% if (isLoggedIn) { %>
-                                        <%- include('../includes/add-to-cart.ejs', {product}) %>
-                                    <% } %>                                
-                                </div>
-                            </article>
-                            <% } %>
-                    </div>
-                    <% } else { %>
-                        <h1>No Products Found!</h1>
-                        <% } %>
-            </main>
-            <%- include('../includes/end.ejs') %>
+    <main class="content">
+        <% if (prods.length> 0) { %>
+            <div class="grid">
+                <% for (let product of prods) { %>
+                    <article class="card">
+                        <%- include('../includes/product-card.ejs', {product}) %>
+                        <div class="card__actions">
+                            <a href="/products/<%= product._id %>" class="btn">Details</a>
+                            <% if (isLoggedIn) { %>
+                                <%- include('../includes/add-to-cart.ejs', {product}) %>
+                            <% } %>                                
+                        </div>
+                    </article>
+                    <% } %>
+            </div>
+        <% } else { %>
+            <h1>No Products Found!</h1>
+            <% } %>
+        <%- include('../includes/pagination.ejs', {currentPage, previousPage, nextPage, hasPreviousPage, hasNextPage, lastPage }) %>    
+    </main>
+<%- include('../includes/end.ejs') %>

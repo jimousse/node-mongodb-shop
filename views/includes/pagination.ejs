@@ -1,0 +1,23 @@
+<section class="pagination">
+    <!-- always show first page-->
+    <% if(currentPage != 1  && previousPage != 1) { %>
+        <a class="pagination__link" href="/?page=1">1</a>  
+    <% } %>
+    <% if(currentPage > 3) { %>
+        ...
+    <% } %>
+    <!-- always show first page-->
+    <% if (hasPreviousPage) { %>
+        <a class="pagination__link" href="/?page=<%= currentPage - 1 %>"><%= currentPage - 1 %></a>  
+    <% } %>
+    <a class="pagination__link active" href="/?page=<%= currentPage %>"><%= currentPage %></a>
+    <% if (hasNextPage) { %>
+        <a class="pagination__link" href="/?page=<%= currentPage + 1 %>"><%= currentPage + 1 %></a>  
+    <% } %>
+    <% if (currentPage + 1 < lastPage - 1 ) { %>    
+        ...  
+    <% } %>
+    <% if (lastPage !== currentPage && nextPage !== lastPage) { %>    
+        <a class="pagination__link" href="/?page=<%= lastPage %>"><%= lastPage %></a>  
+    <% } %>
+</section>

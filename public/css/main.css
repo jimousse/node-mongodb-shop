@@ -277,5 +277,34 @@ a.btn:visited, a.btn:link {
     .product-detail__image > img {
       height: 100%; }
 
+.pagination {
+  text-align: center;
+  margin-top: 2rem; }
+  .pagination__link:link, .pagination__link:visited {
+    text-decoration: none;
+    background: linear-gradient(to bottom, #f7f8fa, #e7e9ec);
+    border-radius: 2px;
+    border-color: #ADB1B8 #A2A6AC #8D9096;
+    border-width: 1px;
+    border-style: solid;
+    padding: .7rem 1.7rem;
+    font-family: inherit;
+    font-size: 1.2rem;
+    color: #000; }
+  .pagination__link:focus {
+    outline: none;
+    border-color: #e77600;
+    box-shadow: 0 0 3px 2px rgba(231, 118, 0, 0.5); }
+  .pagination__link.active {
+    cursor: pointer;
+    border-color: #e77600;
+    background: #fff;
+    color: #b45c00;
+    font-weight: bold; }
+  .pagination__link:hover {
+    cursor: pointer;
+    border-color: #a2a6ac #979aa1 #82858a;
+    background: #e7e9ec; }
+
 .content {
   padding: 5rem; }

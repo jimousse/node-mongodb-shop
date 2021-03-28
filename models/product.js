@@ -1,7 +1,7 @@
 const getDb = require('../util/database').getDb;
 const mongodb = require('mongodb');
 const { deleteFile } = require('../util/file');
-
+const { ITEMS_PER_PAGE } = require('./constants');
 const COLLECTION_NAME = 'products';
 
 class Product {
@@ -41,6 +41,22 @@ class Product {
         return products;
       })
       .catch(e => console.log(e));
+  }
+
+  static getProductsByPage(pageNumber = 1) {
+    const db = getDb();
+    return db.collection(COLLECTION_NAME)
+      .find()
+      .skip((pageNumber - 1) * ITEMS_PER_PAGE)
+      .limit(ITEMS_PER_PAGE)
+      .toArray();
+  }
+
+  static count() { // faster than retrieving them
+    const db = getDb();
+    return db.collection(COLLECTION_NAME)
+      .find()
+      .count();
   }
 
   static findById(id) {

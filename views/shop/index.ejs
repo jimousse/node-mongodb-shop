@@ -19,5 +19,6 @@
             <% } else { %>
                 <h1>No Products Found!</h1>
             <% } %>
+        <%- include('../includes/pagination.ejs', {currentPage, previousPage, nextPage, hasPreviousPage, hasNextPage, lastPage }) %>    
     </main>
 <%- include('../includes/end.ejs') %>
