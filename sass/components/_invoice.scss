@@ -1,0 +1,18 @@
+.invoice-link {
+  &:visited,
+  &:link {
+    color: $link-color;
+    border-bottom: 1px solid $link-color;
+    text-decoration: none;
+  }
+
+  &:hover {
+    color: $color-amazon-orange;
+    border-color: $color-amazon-orange;
+  }
+
+  &:active {
+    color: $link-color-dark;
+    border-color: $link-color-dark;
+  }
+}
