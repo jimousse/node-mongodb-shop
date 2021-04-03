@@ -4,15 +4,16 @@
   }
 
   &__button {
+    padding: 0 1rem;
     height: 100%;
     background-color: transparent;
     color: #fff;
     border: none;
     text-transform: uppercase;
     cursor: pointer;
-
+    font-size: inherit;
     &:focus {
-      outline: none;
+      @include focus-ring-header;
     }
   }
 } 

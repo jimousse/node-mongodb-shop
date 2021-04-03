@@ -28,27 +28,30 @@ body {
   .header__item-list {
     height: 100%;
     display: flex;
-    list-style: none; }
+    list-style: none;
+    margin-left: 1rem; }
   .header__item {
-    padding: 0 1rem;
     display: flex;
     align-items: center;
     cursor: pointer; }
-    .header__item:not(:last-child) {
-      margin-right: 2rem; }
-    .header__item:hover {
-      background-color: #bc7c5a; }
-  .header__item-link:link, .header__item-link:visited {
-    color: #faf9f9;
-    text-decoration: none;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    height: 100%; }
+  .header__item-link {
+    padding: 0 1rem; }
+    .header__item-link:link, .header__item-link:visited {
+      color: #faf9f9;
+      text-decoration: none;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      height: 100%; }
+    .header__item-link:hover {
+      background-color: #cfd5d5; }
+    .header__item-link:focus {
+      outline: none;
+      box-shadow: inset 0px 0px 0px 2px #777, inset 0px 0px 0px 4px #999; }
   .header__item-name {
     color: #faf9f9; }
   .header__item:hover > .header__item-link > span {
-    color: #f4f2f2; }
+    color: #000; }
   .header .login {
     display: inline-block;
     height: 100%; }
@@ -257,14 +260,17 @@ a.btn:visited, a.btn:link {
   height: 100%; }
 
 .logout__button {
+  padding: 0 1rem;
   height: 100%;
   background-color: transparent;
   color: #fff;
   border: none;
   text-transform: uppercase;
-  cursor: pointer; }
+  cursor: pointer;
+  font-size: inherit; }
   .logout__button:focus {
-    outline: none; }
+    outline: none;
+    box-shadow: inset 0px 0px 0px 2px #777, inset 0px 0px 0px 4px #999; }
 
 .product-detail {
   display: flex;

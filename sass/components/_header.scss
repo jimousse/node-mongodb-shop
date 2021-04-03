@@ -14,32 +14,35 @@
     height: 100%;
     display: flex;
     list-style: none;
+    margin-left: 1rem;
   }
 
   &__item {
-    padding: 0 1rem;
-    &:not(:last-child) {
-      margin-right: 2rem;
-    }
-
     display: flex;
     align-items: center;
-
     cursor: pointer;
-
-    &:hover {
-      background-color: darken(#cb997e, 10%);
-    }
   }
 
-  &__item-link:link,
-  &__item-link:visited {
-    color: $color-grey-light-1;
-    text-decoration: none;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    height: 100%;
+  &__item-link {
+    padding: 0 1rem;
+
+    &:link,
+    &:visited {
+      color: $color-grey-light-1;
+      text-decoration: none;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+    
+    &:hover {
+      background-color: darken(#eaeded, 10%);
+    }
+
+    &:focus {
+      @include focus-ring-header;
+    }
   } 
 
   &__item-name {
@@ -48,7 +51,7 @@
 
   &__item:hover > &__item-link {
     & > span {
-      color: $color-grey-light-2;
+      color: $color-black;
     }
   }
 
