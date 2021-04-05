@@ -1,21 +1,23 @@
 {
-  "name": "book-shop",
+  "name": "super-cool-shop",
   "version": "1.0.0",
   "description": "Node/mongodb project",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js",
+    "start": "node app.js",
     "start-server": "node --trace-warnings app.js",
-    "compile:sass": "node-sass sass/main.scss public/css/main.css"
+    "compile:sass": "node-sass sass/main.scss public/css/main.css",
+    "start:dev": "nodemon app.js"
   },
-  "author": "Jimmy",
+  "author": "Jimmy Castex",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^1.18.3",
-    "node-sass": "^5.0.0"
+    "node-sass": "^5.0.0",
+    "nodemon": "^1.18.3"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "connect-flash": "^0.1.1",

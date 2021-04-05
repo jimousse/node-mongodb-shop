@@ -8,6 +8,7 @@ const mongoConnect = require('./util/database').mongoConnect;
 const MongoDBStore = require('connect-mongodb-session')(session);
 const csrfProtection = csrf({});
 const flash = require('connect-flash');
+require('dotenv').config();
 
 // middleware
 const fileUploadMw = require('./middlewares/file-upload');
@@ -23,9 +24,7 @@ const shopRoutes = require('./routes/shop');
 const authRoutes = require('./routes/auth');
 
 // db
-const DB_NAME = 'shop';
-const DB_SERVER_URL = fs.readFileSync('./mongodb-server.txt', 'utf-8');
-const MONGODB_URI = `${DB_SERVER_URL}/${DB_NAME}`;
+const MONGODB_URI = `${process.env.DB_CONNECTION}/${process.env.DB_NAME}`;
 const store = new MongoDBStore({
   uri: MONGODB_URI,
   collection: 'sessions'
@@ -71,5 +70,5 @@ app.use((error, req, res, next) => {
 });
 
 mongoConnect(() => {
-  app.listen(3000);
+  app.listen(process.env.PORT || 3000);
 });
