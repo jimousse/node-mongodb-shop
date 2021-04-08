@@ -5,7 +5,7 @@ Full stack project for an online book shop. This is a multiple-page application 
 - NodeJS/Express.js
 - EJS for server-side rendering
 - Sass
-- Mongoose/MongoDB
+- MongoDB
 
 ## Features implemented
 - User account creation
