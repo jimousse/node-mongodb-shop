@@ -1,6 +1,12 @@
 # NodeJS Book Shop
 Full stack project for an online book shop. This is a multiple-page application using server-side rendering.
 
+## Stack
+- NodeJS/Express.js
+- EJS for server-side rendering
+- Sass
+- Mongoose/MongoDB
+
 ## Features implemented
 - User account creation
 <img src="https://github.com/jimousse/node-mongodb-shop/blob/main/screenshots/signup.jpg" height="200">
@@ -47,9 +53,3 @@ npm start
 ```
 and go to `http://localhost:3000/` and you should be good to go!
 
-
-## Stack
-- NodeJS/Express.js
-- EJS
-- Sass
-- Mongoose/MongoDB
